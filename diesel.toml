@@ -1,9 +1,5 @@
-#diesel.toml
-
-
 [print_schema]
-file="src/internal/storage/schema.rs"
-with_default_plugins= true
+file = "src/internal/storage/generated/schema.rs"
 
 [migrations_directory]
-dir="migrations" 
+dir = "migrations"

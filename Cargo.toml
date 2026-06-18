@@ -29,4 +29,5 @@ chrono = { version = "0.4", features = ["serde"] } # Time parsing mapped directl
 uuid = { version = "1.11", features = ["v4", "serde"] } # ID generation mapped directly to Postgres/Serde
 thiserror = "2.0"               # Idiomatic crate to generate typed, structural application domain errors
 futures = "0.3"                 # Async utilities (needed by patched diesel-async)
+async-trait = "0.1"            # Async trait support for database repository traits
 
