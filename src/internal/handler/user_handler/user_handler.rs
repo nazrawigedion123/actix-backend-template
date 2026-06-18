@@ -1,6 +1,6 @@
 
 // src/internal/handler/user_handler.rs
-use actix_web::{get, post, web, HttpResponse, Responder};
+use actix_web::{web, HttpResponse, Responder};
 use crate::internal::constant::dto::{CreateUserRequest, ApiResponse};
 use crate::internal::module::user_service::UserService;
 use std::sync::Arc;

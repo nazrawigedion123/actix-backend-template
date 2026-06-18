@@ -1,25 +1,34 @@
 pub mod user_handler;
+pub mod middleware;
+// use crate::internal::handler::user_handler::UserHandler;
+// use actix_web::{web, };
+// use actix_web_lab::middleware::{from_fn};
+// use crate::initiator::Handlers;
+// use crate::internal::handler::middleware::{append_trace_header_middleware,dummy_auth_middleware};
 
-use actix_web::web;
-use std::sync::Arc;
 
-/// Route configuration registration block (Replaces your Go glue module)
-pub fn configure_routes(cfg: &mut web::ServiceConfig, handlers: &crate::initiator::Handlers) {
-    // Wrap handler controllers into actix-managed Data pointer references
-    let user_handler_data = web::Data::new(user_handler::UserHandler::new(
-        handlers.user_handler.clone(),
-    ));
 
-    cfg.service(
-        web::scope("/api/v1")
-            .app_data(user_handler_data)
-            .route(
-                "/users",
-                web::post().to(user_handler::UserHandler::create_user),
-            )
-            .route(
-                "/users/{id}",
-                web::get().to(user_handler::UserHandler::get_user),
-            ),
-    );
-}
+// /// Central configuration controller entry point invoked by src/main.rs
+// pub fn configure_routes(cfg: &mut web::ServiceConfig, handlers: &Handlers) {
+//     let user_handler = web::Data::new(
+//         UserHandler::new(handlers.user_handler.clone())
+//     );
+
+//     cfg.service(
+//         web::scope("")
+//             .app_data(user_handler.clone())
+//             .route(
+//                 "/api/v1/users",
+//                 web::post()
+//                     .to(UserHandler::create_user)
+//                     .wrap(from_fn(append_trace_header_middleware)),
+//             )
+//             .route(
+//                 "/api/v1/users/{id}",
+//                 web::get()
+//                     .to(UserHandler::get_user)
+//                     .wrap(from_fn(append_trace_header_middleware))
+//                     .wrap(from_fn(dummy_auth_middleware)),
+//             ),
+//     );
+// }

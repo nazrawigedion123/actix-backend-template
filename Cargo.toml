@@ -9,6 +9,7 @@ diesel-async = { path = ".patched/diesel-async" }
 [dependencies]
 # --- Actix Web Ecosystem ---
 actix-web = "4.9"               # Core web framework
+actix-web-lab = "0.20"          # Extra middleware utilities (from_fn, etc.)
 tracing-actix-web = "0.7"       # Middleware that automatically hooks request context to tracing
 
 # --- Configuration & Environment (Viper Replacements) ---
