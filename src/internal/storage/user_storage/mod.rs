@@ -1,15 +1,37 @@
 
-use diesel::{ExpressionMethods, QueryDsl};
+use chrono::{DateTime, Utc};
+use diesel::{ExpressionMethods, Insertable, QueryDsl, Queryable, Selectable};
 use diesel_async::AsyncPgConnection;
 use diesel_async::pooled_connection::bb8::Pool;
-use crate::internal::storage::UserRepository;
-
+use serde::{Deserialize, Serialize};
 use uuid::Uuid;
-use crate::internal::constant::models::user_models::{NewUserModel, UserModel};
 
+use crate::internal::storage::UserRepository;
+use crate::internal::storage::generated::schema;
 
 // Define an alias for our high-performance bb8 connection pool
 pub type DbPool = Pool<AsyncPgConnection>;
+
+/// Database representation of a User record
+#[derive(Debug, Clone, Queryable, Selectable, Serialize, Deserialize)]
+#[diesel(table_name = schema::users)]
+#[diesel(check_for_backend(diesel::pg::Pg))]
+pub struct UserModel {
+    pub id: Uuid,
+    pub username: String,
+    pub email: String,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+}
+
+/// Structural representation for inserting a new user
+#[derive(Debug, Clone, Insertable, Deserialize)]
+#[diesel(table_name = schema::users)]
+pub struct NewUserModel {
+    pub username: String,
+    pub email: String,
+}
+
 
 
 
@@ -40,7 +62,7 @@ impl UserRepository for DieselUserRepository {
             .pool
             .get()
             .await
-            .map_err(|e| diesel::result::Error::RollbackTransaction)?; // Simplified error translation
+            .map_err(|_| diesel::result::Error::RollbackTransaction)?;
 
         let result = users
             .filter(id.eq(target_id))
@@ -67,7 +89,7 @@ impl UserRepository for DieselUserRepository {
             .pool
             .get()
             .await
-            .map_err(|e| diesel::result::Error::RollbackTransaction)?;
+            .map_err(|_| diesel::result::Error::RollbackTransaction)?;
 
         diesel::insert_into(users)
             .values(&new_user)

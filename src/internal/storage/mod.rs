@@ -4,7 +4,7 @@ pub mod generated;
 
 
 use uuid::Uuid;
-use crate::internal::constant::models::user_models::{NewUserModel, UserModel};
+use self::user_storage::{NewUserModel, UserModel};
 
 
 

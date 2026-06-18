@@ -77,7 +77,7 @@ impl AppInitiator {
         }
     }
 
-    pub async fn initate()->std::io::Result<()>{
+    pub async fn initiate()->std::io::Result<()>{
 
          internal::platform::logger::init_logger();
 

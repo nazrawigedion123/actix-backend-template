@@ -10,7 +10,7 @@ use initiator::AppInitiator;
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
 
-    AppInitiator::initate().await
+    AppInitiator::initiate().await
     
     
 }

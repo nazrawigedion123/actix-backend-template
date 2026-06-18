@@ -3,9 +3,6 @@ name = "backend-actix-template"
 version = "0.1.0"
 edition = "2024"
 
-[patch.crates-io]
-diesel-async = { path = ".patched/diesel-async" }
-
 [dependencies]
 # --- Actix Web Ecosystem ---
 actix-web = "4.9"               # Core web framework
@@ -29,6 +26,6 @@ diesel-async = { version = "0.5", features = ["postgres", "bb8"] }      # Async 
 chrono = { version = "0.4", features = ["serde"] } # Time parsing mapped directly to Postgres/Serde
 uuid = { version = "1.11", features = ["v4", "serde"] } # ID generation mapped directly to Postgres/Serde
 thiserror = "2.0"               # Idiomatic crate to generate typed, structural application domain errors
-futures = "0.3"                 # Async utilities (needed by patched diesel-async)
+futures-util = { version = "0.3", features = ["futures-macro"] }  # diesel-async needs this for try_join!
 async-trait = "0.1"            # Async trait support for database repository traits
 

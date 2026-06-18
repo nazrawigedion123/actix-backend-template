@@ -1,6 +1,6 @@
 pub mod user_service;
 use crate::internal::constant::errors::AppError;
-use crate::internal::constant::models::user_models::{UserModel};
+use crate::internal::storage::user_storage::UserModel;
 
 use uuid::Uuid;
 #[async_trait::async_trait]

@@ -1,8 +1,8 @@
 
 // src/internal/module/user_service.rs
 use crate::internal::constant::errors::AppError;
-use crate::internal::storage::{ UserRepository};
-use crate::internal::constant::models::user_models::{NewUserModel, UserModel};
+use crate::internal::storage::user_storage::{NewUserModel, UserModel};
+use crate::internal::storage::UserRepository;
 use std::sync::Arc;
 use uuid::Uuid;
 use crate::internal::module::UserService;
