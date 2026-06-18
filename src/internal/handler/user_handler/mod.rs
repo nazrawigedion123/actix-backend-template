@@ -1,2 +1,2 @@
-pub mod user_handler;
-pub use user_handler::UserHandler;
+pub mod handler;
+pub use handler::UserHandler;

@@ -2,7 +2,7 @@
 // src/internal/handler/user_handler.rs
 use actix_web::{web, HttpResponse, Responder};
 use crate::internal::constant::dto::{CreateUserRequest, ApiResponse};
-use crate::internal::module::user_service::UserService;
+use crate::internal::module::UserService;
 use std::sync::Arc;
 use uuid::Uuid;
 

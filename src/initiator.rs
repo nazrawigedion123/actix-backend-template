@@ -3,7 +3,8 @@ use crate::internal;
 
 use crate::config::AppConfig;
 use crate::internal::storage::user_storage::DieselUserRepository;
-use crate::internal::module::user_service::{DefaultUserService, UserService};
+use crate::internal::module::user_service::{DefaultUserService, };
+use crate::internal::module::UserService;
 use diesel_async::pooled_connection::bb8::Pool;
 use diesel_async::AsyncPgConnection;
 use std::sync::Arc;

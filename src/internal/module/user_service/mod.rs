@@ -1,16 +1,11 @@
 
 // src/internal/module/user_service.rs
 use crate::internal::constant::errors::AppError;
-use crate::internal::storage::user_storage::{NewUserModel, UserModel, UserRepository};
+use crate::internal::storage::{ UserRepository};
+use crate::internal::constant::models::user_models::{NewUserModel, UserModel};
 use std::sync::Arc;
 use uuid::Uuid;
-
-/// Business operations domain specification interface
-#[async_trait::async_trait]
-pub trait UserService: Send + Sync {
-    async fn get_user_by_id(&self, id: Uuid) -> Result<UserModel, AppError>;
-    async fn register_new_user(&self, username: String, email: String) -> Result<UserModel, AppError>;
-}
+use crate::internal::module::UserService;
 
 /// Concrete implementation holding our repository trait object wrapper
 pub struct DefaultUserService {
