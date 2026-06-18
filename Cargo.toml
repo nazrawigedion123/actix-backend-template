@@ -1,0 +1,32 @@
+[package]
+name = "backend-actix-template"
+version = "0.1.0"
+edition = "2024"
+
+[patch.crates-io]
+diesel-async = { path = ".patched/diesel-async" }
+
+[dependencies]
+# --- Actix Web Ecosystem ---
+actix-web = "4.9"               # Core web framework
+tracing-actix-web = "0.7"       # Middleware that automatically hooks request context to tracing
+
+# --- Configuration & Environment (Viper Replacements) ---
+serde = { version = "1.0", features = ["derive"] } # Engine to serialize/deserialize structs
+envy = "0.4"                    # Loads environment variables straight into Serde structs
+dotenvy = "0.15"                # Utility to read local .env files automatically during startup
+
+# --- Structured Logging & Telemetry (Uber Zap Replacement) ---
+tracing = "0.1"                 # Core logging macros (info!, error!, warn!, etc.)
+tracing-subscriber = { version = "0.3", features = ["json", "env-filter"] } # Formats logs into structured JSON
+
+# --- Database & Asynchronous ORM Layer (Sqlc Replacement) ---
+diesel = { version = "2.2", features = ["postgres", "chrono", "uuid"] } # Query builder & Type safety engine
+diesel-async = { version = "0.5", features = ["postgres", "bb8"] }      # Async extensions for Diesel using BB8 connection pooling
+
+# --- Data Types & Utilities ---
+chrono = { version = "0.4", features = ["serde"] } # Time parsing mapped directly to Postgres/Serde
+uuid = { version = "1.11", features = ["v4", "serde"] } # ID generation mapped directly to Postgres/Serde
+thiserror = "2.0"               # Idiomatic crate to generate typed, structural application domain errors
+futures = "0.3"                 # Async utilities (needed by patched diesel-async)
+
